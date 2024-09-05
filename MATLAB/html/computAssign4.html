@@ -1,0 +1,237 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      -->
+<title>computAssign4</title>
+<meta name="generator" content="MATLAB 23.2">
+<link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
+<meta name="DC.date" content="2024-04-04">
+<meta name="DC.source" content="computAssign4.m">
+<style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; }
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+span.typesection { color:#A0522D }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style>
+</head>
+<body>
+<div class="content">
+<pre class="codeinput">clear <span class="string">all</span>
+close <span class="string">all</span>
+
+<span class="comment">% Generating random data points. Only do this once then record the</span>
+<span class="comment">% set the values</span>
+
+nmbrPts = 15; <span class="comment">% Number of points you want</span>
+
+<span class="comment">%use the two following lines to get random values for x and yd</span>
+<span class="comment">%x = -5 + 10 * rand(nmbrPts, 1); % Random x values in range [-5, 5]</span>
+<span class="comment">%y = -5 + 10 * rand(nmbrPts, 1);</span>
+
+<span class="comment">% Setting values from one random itteration</span>
+x =[3.1472;4.0579;-3.7301;4.1338;1.3236;-4.0246;-2.2150;0.4688;4.5751;4.6489;-3.4239;4.7059;4.5717;-0.1462;3.0028];
+y =[-3.5811;-0.7824;4.1574;2.9221;4.5949;1.5574;-4.6429;3.4913;4.3399;1.7874;2.5774;2.4313;-1.0777;1.5548;-3.2881];
+points=[x y];
+
+<span class="comment">% Setting which degrees to test for</span>
+PolyDegrees = [1, 5, 10];
+
+<span class="comment">% Setting up the error</span>
+errorVCTR = zeros(1, numel(PolyDegrees));
+
+<span class="comment">% for loop to test each itteration</span>
+<span class="keyword">for</span> i = 1:numel(PolyDegrees)
+    degree = PolyDegrees(i);
+    B = ones(nmbrPts, degree + 1);
+
+    <span class="comment">% for loop to set the A matrix in Ax=b</span>
+    <span class="keyword">for</span> j = 2:(degree + 1)
+        B(:, j) = x.^(j - 1);
+    <span class="keyword">end</span>
+
+    <span class="comment">% Finding the unique x vector in Ax=b using ((A'*A)^-1)*A'*b (y=b)</span>
+    xANS =inv(B'*B)*B'*y;
+
+
+    <span class="comment">% Compute least squares error</span>
+    yBstFit = B * xANS;
+    errorVCTR(i) = norm(y-yBstFit);
+
+
+    <span class="comment">% Using step size of 0.01 to generate the points for polynomial</span>
+    polypointsx = [];
+    polypointsy = [];
+    <span class="keyword">for</span> i=-5:0.01:5
+        polypointsx = [polypointsx i];
+        <span class="keyword">for</span> j = 2:(degree + 1)
+            TempPtsPoly(j) = i.^(j - 1);
+        <span class="keyword">end</span>
+        polypointsy = [polypointsy xANS(1)+sum(sum(TempPtsPoly*xANS))];
+    <span class="keyword">end</span>
+
+    <span class="comment">% Ploting polynomial</span>
+    figure
+    plot(polypointsx,polypointsy)
+    ylim([-10 10]) <span class="comment">% Setting limit so you can see the points</span>
+    hold <span class="string">on</span>
+    xlim([-6 6])
+    scatter(x,y) <span class="comment">% Plotting the random points</span>
+    legend(<span class="string">'Polynomial'</span>, <span class="string">'Random Points'</span>)
+<span class="keyword">end</span>
+
+<span class="comment">% Determining the best fitting polynomial</span>
+[min_error, best_fit_index] = min(errorVCTR); <span class="comment">% Finds which polynomial has least error and which degree it is</span>
+best_degree = PolyDegrees(best_fit_index);
+<span class="keyword">for</span> i=1:length(PolyDegrees)
+    fprintf(<span class="string">'Error of degree %d is %.4f.\n'</span>, PolyDegrees(i), errorVCTR(i)); <span class="comment">% Display all errors</span>
+<span class="keyword">end</span>
+fprintf(<span class="string">'The best fitting polynomial has degree %d with least squares error %.4f.\n'</span>, best_degree, min_error);
+</pre>
+<pre class="codeoutput">Error of degree 1 is 11.2825.
+Error of degree 5 is 8.1113.
+Error of degree 10 is 4.5404.
+The best fitting polynomial has degree 10 with least squares error 4.5404.
+</pre>
+<img vspace="5" hspace="5" src="computAssign4_01.png" alt=""> <img vspace="5" hspace="5" src="computAssign4_02.png" alt=""> <img vspace="5" hspace="5" src="computAssign4_03.png" alt=""> <p class="footer">
+<br>
+<a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2023b</a>
+<br>
+</p>
+</div>
+<!--
+##### SOURCE BEGIN #####
+clear all
+close all
+
+% Generating random data points. Only do this once then record the
+% set the values
+
+nmbrPts = 15; % Number of points you want
+
+%use the two following lines to get random values for x and yd
+%x = -5 + 10 * rand(nmbrPts, 1); % Random x values in range [-5, 5]
+%y = -5 + 10 * rand(nmbrPts, 1);
+
+% Setting values from one random itteration
+x =[3.1472;4.0579;-3.7301;4.1338;1.3236;-4.0246;-2.2150;0.4688;4.5751;4.6489;-3.4239;4.7059;4.5717;-0.1462;3.0028];
+y =[-3.5811;-0.7824;4.1574;2.9221;4.5949;1.5574;-4.6429;3.4913;4.3399;1.7874;2.5774;2.4313;-1.0777;1.5548;-3.2881];
+points=[x y];
+
+% Setting which degrees to test for
+PolyDegrees = [1, 5, 10];
+
+% Setting up the error 
+errorVCTR = zeros(1, numel(PolyDegrees));
+
+% for loop to test each itteration
+for i = 1:numel(PolyDegrees)
+    degree = PolyDegrees(i);
+    B = ones(nmbrPts, degree + 1);
+
+    % for loop to set the A matrix in Ax=b
+    for j = 2:(degree + 1)
+        B(:, j) = x.^(j - 1);
+    end
+
+    % Finding the unique x vector in Ax=b using ((A'*A)^-1)*A'*b (y=b)
+    xANS =inv(B'*B)*B'*y;
+
+    
+    % Compute least squares error
+    yBstFit = B * xANS;
+    errorVCTR(i) = norm(y-yBstFit);
+
+
+    % Using step size of 0.01 to generate the points for polynomial
+    polypointsx = [];
+    polypointsy = [];
+    for i=-5:0.01:5
+        polypointsx = [polypointsx i];
+        for j = 2:(degree + 1)
+            TempPtsPoly(j) = i.^(j - 1);
+        end
+        polypointsy = [polypointsy xANS(1)+sum(sum(TempPtsPoly*xANS))];
+    end
+
+    % Ploting polynomial
+    figure
+    plot(polypointsx,polypointsy)
+    ylim([-10 10]) % Setting limit so you can see the points
+    hold on
+    xlim([-6 6])
+    scatter(x,y) % Plotting the random points
+    legend('Polynomial', 'Random Points')
+end
+
+% Determining the best fitting polynomial
+[min_error, best_fit_index] = min(errorVCTR); % Finds which polynomial has least error and which degree it is
+best_degree = PolyDegrees(best_fit_index);
+for i=1:length(PolyDegrees)
+    fprintf('Error of degree %d is %.4f.\n', PolyDegrees(i), errorVCTR(i)); % Display all errors
+end
+fprintf('The best fitting polynomial has degree %d with least squares error %.4f.\n', best_degree, min_error);
+
+##### SOURCE END #####
+-->
+</body>
+</html>

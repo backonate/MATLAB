@@ -1,0 +1,387 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      -->
+<title>ensc180assign4</title>
+<meta name="generator" content="MATLAB 23.2">
+<link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
+<meta name="DC.date" content="2024-04-09">
+<meta name="DC.source" content="ensc180assign4.m">
+<style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; }
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+span.typesection { color:#A0522D }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style>
+</head>
+<body>
+<div class="content">
+<h2>Contents</h2>
+<div>
+<ul>
+<li>
+<a href="#1">Q1</a>
+</li>
+<li>
+<a href="#2">Q2</a>
+</li>
+</ul>
+</div>
+<h2 id="1">Q1</h2>
+<pre class="codeinput">x=2:6;
+y=[65 67 75 71 68];
+
+Polydegrees = 1:4;
+coefficientVCTR = cell(1, length(Polydegrees));
+polynomial = cell(1, length(Polydegrees));
+
+<span class="comment">% For loop to find polynomials with degrees 1 to 4</span>
+<span class="keyword">for</span> i = 1:length(Polydegrees)
+    coefficientVCTR{i} = polyfit(x, y, Polydegrees(i));
+    polynomial{i} = poly2sym(coefficientVCTR{i});
+    disp([<span class="string">'Degree '</span> num2str(Polydegrees(i))])
+    polynomial{i}
+    coefficientVCTR{i}
+<span class="keyword">end</span>
+
+<span class="comment">% Plotting the 4 polynomials together</span>
+tiledlayout(2, 2);
+
+<span class="keyword">for</span> i = 1:length(Polydegrees)
+    nexttile;
+    xRange = linspace(min(x), max(x), 100);
+    degree = Polydegrees(i);
+    yEstimate = polyval(coefficientVCTR{i}, xRange);
+    plot(x, y, <span class="string">'s'</span>, xRange, yEstimate);
+    title([<span class="string">'Degree '</span> num2str(degree)]);
+    legend(<span class="string">'Original Data'</span>, <span class="string">'Polynomial Estimate'</span>);
+
+    <span class="comment">% Calculating MSE value for each case</span>
+    yPredicted = polyval(coefficientVCTR{i}, x);
+    mse = sum((y - yPredicted).^2)./length(y);
+    disp([<span class="string">'Degree '</span> num2str(degree) <span class="string">' MSE = '</span> num2str(mse)]);
+<span class="keyword">end</span>
+</pre>
+<pre class="codeoutput">Degree 1
+ 
+ans =
+ 
+x + 326/5
+ 
+
+ans =
+
+    1.0000   65.2000
+
+Degree 2
+ 
+ans =
+ 
+(95*x)/7 - (11*x^2)/7 + 216/5
+ 
+
+ans =
+
+   -1.5714   13.5714   43.2000
+
+Degree 3
+ 
+ans =
+ 
+- (5*x^3)/12 + (965057063007985*x^2)/281474976710656 - (1410725776133255*x)/281474976710656 + 321/5
+ 
+
+ans =
+
+   -0.4167    3.4286   -5.0119   64.2000
+
+Degree 4
+ 
+ans =
+ 
+(5817149518687327*x^4)/4503599627370496 - (370901922436467*x^3)/17592186044416 + (2141115643155989*x^2)/17592186044416 - (2550133968688739*x)/8796093022208 + 2691604464795927/8796093022208
+ 
+
+ans =
+
+    1.2917  -21.0833  121.7083 -289.9167  306.0000
+
+Degree 1 MSE = 10.16
+Degree 2 MSE = 3.2457
+Degree 3 MSE = 2.7457
+Degree 4 MSE = 1.2572e-24
+</pre>
+<img vspace="5" hspace="5" src="ensc180assign4_01.png" alt=""> <h2 id="2">Q2</h2>
+<pre class="codeinput">disp(<span class="string">'Q2: '</span>)
+syms <span class="string">x</span> <span class="string">y</span>;
+<span class="comment">%Defining suitable symbolic expressions</span>
+eq_1 =(x + 2)^2 + y^2 ==30;
+eq_2 =x + 4*y + 2*y^2 ==5;
+
+<span class="comment">% Solving the two equations</span>
+sol = solve([eq_1, eq_2], [x, y]);
+disp(<span class="string">'x symbolic solutions: '</span>)
+disp(sol.x)
+disp(<span class="string">'y symbolic solutions: '</span>)
+disp(sol.y)
+
+<span class="comment">% Converting to numerical values for display</span>
+doublesolutions = double(struct2array(sol));
+xsols=doublesolutions(:,1)
+ysols=doublesolutions(:,2)
+nmbrOfSols=length(xsols)
+
+<span class="comment">% Verifying solutions of the symbolic equation</span>
+
+<span class="keyword">for</span> i = 1:4
+    x=xsols(i);
+    y=ysols(i);
+
+    syms <span class="string">x</span> <span class="string">y</span>
+
+    eq_1_2_check = [subs((x + 2)^2 + y^2,[x y], [xsols(i), ysols(i)]), subs(x + 4*y + 2*y^2,[x y], [xsols(i), ysols(i)])] <span class="comment">% Subbing into only left side</span>
+    eqCheck_Double = double(eq_1_2_check)
+<span class="keyword">end</span>
+
+
+<span class="comment">% Plotting the curves of the two symbolic eq's and its solutions</span>
+
+figure;
+fimplicit(eq_1, [-8, 8, -8, 8], <span class="string">'r--'</span>);
+hold <span class="string">on</span>;
+fimplicit(eq_2, [-8, 8, -8, 8], <span class="string">'b-'</span>);
+stem(doublesolutions(:,1), doublesolutions(:,2), <span class="string">'fill'</span>);
+ylabel(<span class="string">'y'</span>);
+xlabel(<span class="string">'x'</span>);
+title(<span class="string">'Plot of Symbolic Equations'</span>);
+legend(<span class="string">'Equation 1'</span>, <span class="string">'Equation 2'</span>, <span class="string">'Solutions'</span>);
+</pre>
+<pre class="codeoutput">Q2: 
+x symbolic solutions: 
+5 - 4*root(z^4 + 4*z^3 - (11*z^2)/4 - 14*z + 19/4, z, 1) - 2*root(z^4 + 4*z^3 - (11*z^2)/4 - 14*z + 19/4, z, 1)^2
+5 - 4*root(z^4 + 4*z^3 - (11*z^2)/4 - 14*z + 19/4, z, 2) - 2*root(z^4 + 4*z^3 - (11*z^2)/4 - 14*z + 19/4, z, 2)^2
+5 - 4*root(z^4 + 4*z^3 - (11*z^2)/4 - 14*z + 19/4, z, 3) - 2*root(z^4 + 4*z^3 - (11*z^2)/4 - 14*z + 19/4, z, 3)^2
+5 - 4*root(z^4 + 4*z^3 - (11*z^2)/4 - 14*z + 19/4, z, 4) - 2*root(z^4 + 4*z^3 - (11*z^2)/4 - 14*z + 19/4, z, 4)^2
+ 
+y symbolic solutions: 
+root(z^4 + 4*z^3 - (11*z^2)/4 - 14*z + 19/4, z, 1)
+root(z^4 + 4*z^3 - (11*z^2)/4 - 14*z + 19/4, z, 2)
+root(z^4 + 4*z^3 - (11*z^2)/4 - 14*z + 19/4, z, 3)
+root(z^4 + 4*z^3 - (11*z^2)/4 - 14*z + 19/4, z, 4)
+ 
+
+xsols =
+
+    3.4673
+   -7.2176
+    2.9085
+   -6.1582
+
+
+ysols =
+
+    0.3290
+    1.6662
+   -2.4303
+   -3.5650
+
+
+nmbrOfSols =
+
+     4
+
+ 
+eq_1_2_check =
+ 
+[9735556609752801943115447522288281/324518553658426726783156020576256, 811296384146066842482518741325913/162259276829213363391578010288128]
+ 
+
+eqCheck_Double =
+
+    30     5
+
+ 
+eq_1_2_check =
+ 
+[152118072027387538889651038727245/5070602400912917605986812821504, 12676506002282296341697487670505/2535301200456458802993406410752]
+ 
+
+eqCheck_Double =
+
+   30.0000    5.0000
+
+ 
+eq_1_2_check =
+ 
+[38029518006846880642139333701861/1267650600228229401496703205376, 792281625142643441101611795849/158456325028528675187087900672]
+ 
+
+eqCheck_Double =
+
+    30     5
+
+ 
+eq_1_2_check =
+ 
+[9507379501711721337129966787205/316912650057057350374175801344, 792281625142643662201592384289/158456325028528675187087900672]
+ 
+
+eqCheck_Double =
+
+   30.0000    5.0000
+
+</pre>
+<img vspace="5" hspace="5" src="ensc180assign4_02.png" alt=""> <p class="footer">
+<br>
+<a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2023b</a>
+<br>
+</p>
+</div>
+<!--
+##### SOURCE BEGIN #####
+%% Q1
+x=2:6;
+y=[65 67 75 71 68];
+
+Polydegrees = 1:4;
+coefficientVCTR = cell(1, length(Polydegrees));
+polynomial = cell(1, length(Polydegrees));
+
+% For loop to find polynomials with degrees 1 to 4
+for i = 1:length(Polydegrees)
+    coefficientVCTR{i} = polyfit(x, y, Polydegrees(i));
+    polynomial{i} = poly2sym(coefficientVCTR{i});
+    disp(['Degree ' num2str(Polydegrees(i))])
+    polynomial{i}
+    coefficientVCTR{i}
+end
+
+% Plotting the 4 polynomials together
+tiledlayout(2, 2);
+
+for i = 1:length(Polydegrees)
+    nexttile;
+    xRange = linspace(min(x), max(x), 100);
+    degree = Polydegrees(i);
+    yEstimate = polyval(coefficientVCTR{i}, xRange);
+    plot(x, y, 's', xRange, yEstimate);
+    title(['Degree ' num2str(degree)]);
+    legend('Original Data', 'Polynomial Estimate');
+    
+    % Calculating MSE value for each case
+    yPredicted = polyval(coefficientVCTR{i}, x);
+    mse = sum((y - yPredicted).^2)./length(y);
+    disp(['Degree ' num2str(degree) ' MSE = ' num2str(mse)]);
+end
+
+
+%% Q2
+
+disp('Q2: ')
+syms x y;
+%Defining suitable symbolic expressions
+eq_1 =(x + 2)^2 + y^2 ==30;
+eq_2 =x + 4*y + 2*y^2 ==5;
+
+% Solving the two equations
+sol = solve([eq_1, eq_2], [x, y]);
+disp('x symbolic solutions: ')
+disp(sol.x)
+disp('y symbolic solutions: ')
+disp(sol.y)
+
+% Converting to numerical values for display
+doublesolutions = double(struct2array(sol));
+xsols=doublesolutions(:,1)
+ysols=doublesolutions(:,2)
+nmbrOfSols=length(xsols)
+
+% Verifying solutions of the symbolic equation
+
+for i = 1:4
+    x=xsols(i);
+    y=ysols(i);
+
+    syms x y
+
+    eq_1_2_check = [subs((x + 2)^2 + y^2,[x y], [xsols(i), ysols(i)]), subs(x + 4*y + 2*y^2,[x y], [xsols(i), ysols(i)])] % Subbing into only left side
+    eqCheck_Double = double(eq_1_2_check)
+end
+
+
+% Plotting the curves of the two symbolic eq's and its solutions
+
+figure;
+fimplicit(eq_1, [-8, 8, -8, 8], 'rREPLACE_WITH_DASH_DASH');
+hold on;
+fimplicit(eq_2, [-8, 8, -8, 8], 'b-');
+stem(doublesolutions(:,1), doublesolutions(:,2), 'fill');
+ylabel('y');
+xlabel('x');
+title('Plot of Symbolic Equations');
+legend('Equation 1', 'Equation 2', 'Solutions');
+
+##### SOURCE END #####
+-->
+</body>
+</html>

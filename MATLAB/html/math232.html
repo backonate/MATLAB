@@ -1,0 +1,627 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      -->
+<title>math232</title>
+<meta name="generator" content="MATLAB 23.2">
+<link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
+<meta name="DC.date" content="2024-02-16">
+<meta name="DC.source" content="math232.m">
+<style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; }
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+span.typesection { color:#A0522D }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style>
+</head>
+<body>
+<div class="content">
+<pre class="codeinput">
+<span class="comment">%Q1: Set the value of m</span>
+<span class="comment">%case1:</span>
+m = 10;
+
+<span class="comment">% Number of column vectors</span>
+n = 10; <span class="comment">% You can change this value for different cases</span>
+
+<span class="comment">% Number of times to generate the vectors</span>
+numOfTrials = 5;
+
+<span class="comment">% Initialize counters for linearly independent and dependent sets</span>
+indCount = 0;
+dependCount = 0;
+
+<span class="keyword">for</span> trial = 1:numOfTrials
+    <span class="comment">% Generate random column vectors</span>
+    Y = randn(m, n);
+
+    <span class="comment">% Check linear independence</span>
+    <span class="keyword">if</span> rank(Y) == n
+        fprintf(<span class="string">'Trial %d: Linearly independent set\n'</span>, trial);
+        indCount = indCount + 1;
+    <span class="keyword">else</span>
+        fprintf(<span class="string">'Trial %d: Linearly dependent set\n'</span>, trial);
+        dependCount = dependCount + 1;
+    <span class="keyword">end</span>
+<span class="keyword">end</span>
+
+<span class="comment">% Display the results</span>
+fprintf(<span class="string">'\nResults:\n'</span>);
+fprintf(<span class="string">'Linearly independent sets: %d\n'</span>, indCount);
+fprintf(<span class="string">'Linearly dependent sets: %d\n'</span>, dependCount);
+
+
+<span class="comment">%case2:</span>
+m = 12;
+
+<span class="comment">% Number of column vectors</span>
+n = 10; <span class="comment">% You can change this value for different cases</span>
+
+
+
+<span class="comment">% Initialize counters for linearly independent and dependent sets</span>
+indCount2 = 0;
+dependCount2 = 0;
+
+<span class="keyword">for</span> trial = 1:numOfTrials
+    <span class="comment">% Generate random column vectors</span>
+    Y = randn(m, n);
+
+    <span class="comment">% Check linear independence</span>
+    <span class="keyword">if</span> rank(Y) == n
+        fprintf(<span class="string">'Trial %d: Linearly independent set\n'</span>, trial);
+        indCount2 = indCount2 + 1;
+    <span class="keyword">else</span>
+        fprintf(<span class="string">'Trial %d: Linearly dependent set\n'</span>, trial);
+        dependCount2 = dependCount2 + 1;
+    <span class="keyword">end</span>
+<span class="keyword">end</span>
+
+<span class="comment">% Display the results</span>
+fprintf(<span class="string">'\nResults:\n'</span>);
+fprintf(<span class="string">'Linearly independent sets: %d\n'</span>, indCount2);
+fprintf(<span class="string">'Linearly dependent sets: %d\n'</span>, dependCount2);
+
+
+<span class="comment">%case3:</span>
+
+m = 10;
+
+<span class="comment">% Number of column vectors</span>
+n = 12; <span class="comment">% You can change this value for different cases</span>
+
+
+
+<span class="comment">% Initialize counters for linearly independent and dependent sets</span>
+indCount3 = 0;
+dependCount3 = 0;
+
+<span class="keyword">for</span> trial = 1:numOfTrials
+    <span class="comment">% Generate random column vectors</span>
+    Y = randn(m, n);
+
+    <span class="comment">% Check linear independence</span>
+    <span class="keyword">if</span> rank(Y) == n
+        fprintf(<span class="string">'Trial %d: Linearly independent set\n'</span>, trial);
+        indCount3 = indCount3 + 1;
+    <span class="keyword">else</span>
+        fprintf(<span class="string">'Trial %d: Linearly dependent set\n'</span>, trial);
+        dependCount3 = dependCount3 + 1;
+    <span class="keyword">end</span>
+<span class="keyword">end</span>
+
+<span class="comment">% Display the results</span>
+fprintf(<span class="string">'\nResults:\n'</span>);
+fprintf(<span class="string">'Linearly independent sets: %d\n'</span>, indCount3);
+fprintf(<span class="string">'Linearly dependent sets: %d\n'</span>, dependCount3);
+
+
+
+<span class="comment">%Q1.1:</span>
+
+<span class="comment">%case1:</span>
+Ax = randn(11,11); <span class="comment">% creating random matrix where rows (m) = columns (n)</span>
+b = randn(11,1);<span class="comment">% solution vector for Ax</span>
+rref([Ax b]) <span class="comment">%consistent with unique solution</span>
+
+<span class="comment">%case2:</span>
+Ax = rand(13,11); <span class="comment">% creating random matrix where rows (m) &gt; columns (n)</span>
+b = randn(13,1);
+rref([Ax b]) <span class="comment">%inconsistent solution</span>
+
+<span class="comment">%case3:</span>
+Ax = randn(11,13); <span class="comment">% creating random matrix where rows (m) &lt; columns (n)</span>
+b = randn(11,1);
+rref([Ax b]) <span class="comment">%consistent with infinitely many solutions (has 2 free variables)</span>
+
+<span class="comment">%Q1.2: giving exceptions for the cases:</span>
+
+<span class="comment">%case1: (should be consistent with unique soln)</span>
+Ax = [1,0,0;0,1,0;0,0,0]; <span class="comment">% creating random matrix where rows (m) = columns (n)</span>
+b = [1,1,0]'; <span class="comment">%soln vector for Ax</span>
+
+rref([Ax b]) <span class="comment">%counter example gives infinitely many solutions</span>
+
+<span class="comment">%case2: (should be inconsistent solution)</span>
+Ax = [1,0,0;0,1,1;0,0,1;1,1,1]; <span class="comment">% creating random matrix where rows (m) &gt; columns (n)</span>
+b = [0,0,0,0]';
+
+rref([Ax b]) <span class="comment">% counter example gives unique solution set = to 0</span>
+
+<span class="comment">%case3: (should be consistent with infinetly many solutions</span>
+Ax = [1,0,0,0;0,1,0,0;0,0,0,0]; <span class="comment">% creating random matrix where rows (m) &lt; columns (n)</span>
+b = [1,1,1]';
+rref([Ax b]) <span class="comment">%counter example gives inconsistent solution</span>
+
+
+<span class="comment">%Q2:</span>
+clear <span class="string">all</span>
+close <span class="string">all</span>
+
+<span class="comment">%Q2.1</span>
+s1 = [1,4,1,-1;2,1,0,1;-1,1,2,2;3,8,2,-1];
+rref(s1) <span class="comment">%check to see if the span s1 is linearly independent or not (c1 = -c4, c2 = c4, c3 = -2c4 c4 = t) therefore c4 is dependent on the others and it is not equal to R^4 because c4 is a free variable</span>
+
+s1m = [1,4,1;2,1,0;-1,1,2;3,8,2]; <span class="comment">%s1 modified to be linearly independent with the vector w4 taken out.</span>
+rref(s1m) <span class="comment">% this now verifies to us that when s1 has the w4 vector taken out, it is linearly independent.</span>
+
+<span class="comment">%since there are 3 vectors in s1 that are linearly independent to each other, this means that s1 span{w1,w2,w3,w4} is a hyperplane because it has 3 directional vectors</span>
+
+<span class="comment">%Q2.2</span>
+z2 = [1,0,2,2]';
+z3 = [3,4,0,8]';
+
+z2span = rref([s1m z2]); <span class="comment">% this will show us if z2 is a part of span s1</span>
+z2span <span class="comment">%the rref shows us that the solution is consistent with c3 = 1, c2 = 0 and c1 = 0, therefore z2 is a vector a part of s1</span>
+
+z3span = rref([s1m z3]); <span class="comment">%this will show us if z3 is a part of span s1</span>
+z3span <span class="comment">%the rref shows that the solution is consistent with c3 = 1, c2 = 0, and c1 = 2, therefore z3 is a vector a part of s1</span>
+
+
+<span class="comment">%Q2.3 (letting a = 6 in z1)</span>
+s21 = [2,1,3;4,0,4;-2,2,0;6,2,8]; <span class="comment">%s2 = span{z1,z2,z3}</span>
+
+s2span1 = rref(s21); <span class="comment">% seeing if z1 is linearly dependent or independent to z2 and z3 when a = 6</span>
+s2span1 <span class="comment">% the rref shows that there are 1 free variables when a = 6. Therefore, z1 is linearly dependent to z2 and z3 which are linearly dependent to each other. therefore s2 is a 2d plane.</span>
+
+<span class="comment">%Q2.4 (letting a = 5 in z1 and finding dimonsion of s1 intersection s2)</span>
+s22 = [2,1,3;4,0,4;-2,2,0;5,2,8]; <span class="comment">%s2 = span{z1,z2,z3}</span>
+rref(s22) <span class="comment">%shows that s22 is linearly independent when a = 5</span>
+
+int = [s1m -s22 zeros(4,1)]; <span class="comment">%finding intersection of s1 and s2</span>
+i = rref(int); <span class="comment">%rref to get intersection</span>
+i <span class="comment">%rref of intersection shows us that there are 2 free variables. this means the intersection of the hyperplanes is a 2d plane</span>
+</pre>
+<pre class="codeoutput">Trial 1: Linearly independent set
+Trial 2: Linearly independent set
+Trial 3: Linearly independent set
+Trial 4: Linearly independent set
+Trial 5: Linearly independent set
+
+Results:
+Linearly independent sets: 5
+Linearly dependent sets: 0
+Trial 1: Linearly independent set
+Trial 2: Linearly independent set
+Trial 3: Linearly independent set
+Trial 4: Linearly independent set
+Trial 5: Linearly independent set
+
+Results:
+Linearly independent sets: 5
+Linearly dependent sets: 0
+Trial 1: Linearly dependent set
+Trial 2: Linearly dependent set
+Trial 3: Linearly dependent set
+Trial 4: Linearly dependent set
+Trial 5: Linearly dependent set
+
+Results:
+Linearly independent sets: 0
+Linearly dependent sets: 5
+
+ans =
+
+  Columns 1 through 7
+
+    1.0000         0         0         0         0         0         0
+         0    1.0000         0         0         0         0         0
+         0         0    1.0000         0         0         0         0
+         0         0         0    1.0000         0         0         0
+         0         0         0         0    1.0000         0         0
+         0         0         0         0         0    1.0000         0
+         0         0         0         0         0         0    1.0000
+         0         0         0         0         0         0         0
+         0         0         0         0         0         0         0
+         0         0         0         0         0         0         0
+         0         0         0         0         0         0         0
+
+  Columns 8 through 12
+
+         0         0         0         0   -0.1232
+         0         0         0         0    0.7233
+         0         0         0         0   -0.2050
+         0         0         0         0    2.8262
+         0         0         0         0   -1.1054
+         0         0         0         0    0.2531
+         0         0         0         0   -1.2462
+    1.0000         0         0         0    0.1242
+         0    1.0000         0         0   -1.4248
+         0         0    1.0000         0    0.0209
+         0         0         0    1.0000   -0.7514
+
+
+ans =
+
+     1     0     0     0     0     0     0     0     0     0     0     0
+     0     1     0     0     0     0     0     0     0     0     0     0
+     0     0     1     0     0     0     0     0     0     0     0     0
+     0     0     0     1     0     0     0     0     0     0     0     0
+     0     0     0     0     1     0     0     0     0     0     0     0
+     0     0     0     0     0     1     0     0     0     0     0     0
+     0     0     0     0     0     0     1     0     0     0     0     0
+     0     0     0     0     0     0     0     1     0     0     0     0
+     0     0     0     0     0     0     0     0     1     0     0     0
+     0     0     0     0     0     0     0     0     0     1     0     0
+     0     0     0     0     0     0     0     0     0     0     1     0
+     0     0     0     0     0     0     0     0     0     0     0     1
+     0     0     0     0     0     0     0     0     0     0     0     0
+
+
+ans =
+
+  Columns 1 through 7
+
+    1.0000         0         0         0         0         0         0
+         0    1.0000         0         0         0         0         0
+         0         0    1.0000         0         0         0         0
+         0         0         0    1.0000         0         0         0
+         0         0         0         0    1.0000         0         0
+         0         0         0         0         0    1.0000         0
+         0         0         0         0         0         0    1.0000
+         0         0         0         0         0         0         0
+         0         0         0         0         0         0         0
+         0         0         0         0         0         0         0
+         0         0         0         0         0         0         0
+
+  Columns 8 through 14
+
+         0         0         0         0    0.1473    0.1033   -1.0387
+         0         0         0         0    0.0112    1.1665   -2.3704
+         0         0         0         0   -0.3824   -0.7051    1.4279
+         0         0         0         0    0.7468    0.8188   -1.0677
+         0         0         0         0   -0.5326   -0.2104   -1.0593
+         0         0         0         0   -0.8938   -0.0889   -0.1700
+         0         0         0         0    2.2412    0.0321   -0.2166
+    1.0000         0         0         0    0.2014    0.4103   -1.2127
+         0    1.0000         0         0    2.4192    1.0992   -0.6968
+         0         0    1.0000         0    1.1630    0.5926   -0.1066
+         0         0         0    1.0000    0.8906    0.7655   -0.7444
+
+
+ans =
+
+     1     0     0     1
+     0     1     0     1
+     0     0     0     0
+
+
+ans =
+
+     1     0     0     0
+     0     1     0     0
+     0     0     1     0
+     0     0     0     0
+
+
+ans =
+
+     1     0     0     0     0
+     0     1     0     0     0
+     0     0     0     0     1
+
+
+ans =
+
+     1     0     0     1
+     0     1     0    -1
+     0     0     1     2
+     0     0     0     0
+
+
+ans =
+
+     1     0     0
+     0     1     0
+     0     0     1
+     0     0     0
+
+
+z2span =
+
+     1     0     0     0
+     0     1     0     0
+     0     0     1     1
+     0     0     0     0
+
+
+z3span =
+
+     1     0     0     2
+     0     1     0     0
+     0     0     1     1
+     0     0     0     0
+
+
+s2span1 =
+
+     1     0     1
+     0     1     1
+     0     0     0
+     0     0     0
+
+
+ans =
+
+     1     0     0
+     0     1     0
+     0     0     1
+     0     0     0
+
+
+i =
+
+     1     0     0     0     0    -2     0
+     0     1     0     0     0     0     0
+     0     0     1     0    -1    -1     0
+     0     0     0     1     0     0     0
+
+</pre>
+<p class="footer">
+<br>
+<a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2023b</a>
+<br>
+</p>
+</div>
+<!--
+##### SOURCE BEGIN #####
+%Q1: Set the value of m
+%case1:
+m = 10;
+
+% Number of column vectors
+n = 10; % You can change this value for different cases
+
+% Number of times to generate the vectors
+numOfTrials = 5;
+
+% Initialize counters for linearly independent and dependent sets
+indCount = 0;
+dependCount = 0;
+
+for trial = 1:numOfTrials
+    % Generate random column vectors
+    Y = randn(m, n);
+
+    % Check linear independence
+    if rank(Y) == n
+        fprintf('Trial %d: Linearly independent set\n', trial);
+        indCount = indCount + 1;
+    else
+        fprintf('Trial %d: Linearly dependent set\n', trial);
+        dependCount = dependCount + 1;
+    end
+end
+
+% Display the results
+fprintf('\nResults:\n');
+fprintf('Linearly independent sets: %d\n', indCount);
+fprintf('Linearly dependent sets: %d\n', dependCount);
+
+
+%case2:
+m = 12;
+
+% Number of column vectors
+n = 10; % You can change this value for different cases
+
+
+
+% Initialize counters for linearly independent and dependent sets
+indCount2 = 0;
+dependCount2 = 0;
+
+for trial = 1:numOfTrials
+    % Generate random column vectors
+    Y = randn(m, n);
+
+    % Check linear independence
+    if rank(Y) == n
+        fprintf('Trial %d: Linearly independent set\n', trial);
+        indCount2 = indCount2 + 1;
+    else
+        fprintf('Trial %d: Linearly dependent set\n', trial);
+        dependCount2 = dependCount2 + 1;
+    end
+end
+
+% Display the results
+fprintf('\nResults:\n');
+fprintf('Linearly independent sets: %d\n', indCount2);
+fprintf('Linearly dependent sets: %d\n', dependCount2);
+
+
+%case3:
+
+m = 10;
+
+% Number of column vectors
+n = 12; % You can change this value for different cases
+
+
+
+% Initialize counters for linearly independent and dependent sets
+indCount3 = 0;
+dependCount3 = 0;
+
+for trial = 1:numOfTrials
+    % Generate random column vectors
+    Y = randn(m, n);
+
+    % Check linear independence
+    if rank(Y) == n
+        fprintf('Trial %d: Linearly independent set\n', trial);
+        indCount3 = indCount3 + 1;
+    else
+        fprintf('Trial %d: Linearly dependent set\n', trial);
+        dependCount3 = dependCount3 + 1;
+    end
+end
+
+% Display the results
+fprintf('\nResults:\n');
+fprintf('Linearly independent sets: %d\n', indCount3);
+fprintf('Linearly dependent sets: %d\n', dependCount3);
+
+
+
+%Q1.1:
+
+%case1:
+Ax = randn(11,11); % creating random matrix where rows (m) = columns (n)
+b = randn(11,1);% solution vector for Ax
+rref([Ax b]) %consistent with unique solution
+
+%case2:
+Ax = rand(13,11); % creating random matrix where rows (m) > columns (n)
+b = randn(13,1);
+rref([Ax b]) %inconsistent solution
+
+%case3:
+Ax = randn(11,13); % creating random matrix where rows (m) < columns (n)
+b = randn(11,1); 
+rref([Ax b]) %consistent with infinitely many solutions (has 2 free variables) 
+
+%Q1.2: giving exceptions for the cases:
+
+%case1: (should be consistent with unique soln)
+Ax = [1,0,0;0,1,0;0,0,0]; % creating random matrix where rows (m) = columns (n)
+b = [1,1,0]'; %soln vector for Ax
+
+rref([Ax b]) %counter example gives infinitely many solutions
+
+%case2: (should be inconsistent solution)
+Ax = [1,0,0;0,1,1;0,0,1;1,1,1]; % creating random matrix where rows (m) > columns (n)
+b = [0,0,0,0]';
+
+rref([Ax b]) % counter example gives unique solution set = to 0
+
+%case3: (should be consistent with infinetly many solutions
+Ax = [1,0,0,0;0,1,0,0;0,0,0,0]; % creating random matrix where rows (m) < columns (n)
+b = [1,1,1]'; 
+rref([Ax b]) %counter example gives inconsistent solution
+
+
+%Q2:
+clear all
+close all
+
+%Q2.1
+s1 = [1,4,1,-1;2,1,0,1;-1,1,2,2;3,8,2,-1];
+rref(s1) %check to see if the span s1 is linearly independent or not (c1 = -c4, c2 = c4, c3 = -2c4 c4 = t) therefore c4 is dependent on the others and it is not equal to R^4 because c4 is a free variable
+
+s1m = [1,4,1;2,1,0;-1,1,2;3,8,2]; %s1 modified to be linearly independent with the vector w4 taken out.
+rref(s1m) % this now verifies to us that when s1 has the w4 vector taken out, it is linearly independent.
+
+%since there are 3 vectors in s1 that are linearly independent to each other, this means that s1 span{w1,w2,w3,w4} is a hyperplane because it has 3 directional vectors
+
+%Q2.2
+z2 = [1,0,2,2]';
+z3 = [3,4,0,8]';
+
+z2span = rref([s1m z2]); % this will show us if z2 is a part of span s1
+z2span %the rref shows us that the solution is consistent with c3 = 1, c2 = 0 and c1 = 0, therefore z2 is a vector a part of s1
+
+z3span = rref([s1m z3]); %this will show us if z3 is a part of span s1
+z3span %the rref shows that the solution is consistent with c3 = 1, c2 = 0, and c1 = 2, therefore z3 is a vector a part of s1
+
+
+%Q2.3 (letting a = 6 in z1)
+s21 = [2,1,3;4,0,4;-2,2,0;6,2,8]; %s2 = span{z1,z2,z3}
+
+s2span1 = rref(s21); % seeing if z1 is linearly dependent or independent to z2 and z3 when a = 6
+s2span1 % the rref shows that there are 1 free variables when a = 6. Therefore, z1 is linearly dependent to z2 and z3 which are linearly dependent to each other. therefore s2 is a 2d plane.
+
+%Q2.4 (letting a = 5 in z1 and finding dimonsion of s1 intersection s2)
+s22 = [2,1,3;4,0,4;-2,2,0;5,2,8]; %s2 = span{z1,z2,z3}
+rref(s22) %shows that s22 is linearly independent when a = 5
+
+int = [s1m -s22 zeros(4,1)]; %finding intersection of s1 and s2
+i = rref(int); %rref to get intersection
+i %rref of intersection shows us that there are 2 free variables. this means the intersection of the hyperplanes is a 2d plane
+
+
+##### SOURCE END #####
+-->
+</body>
+</html>
